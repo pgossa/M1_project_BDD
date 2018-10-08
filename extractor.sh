@@ -9,7 +9,7 @@ do
 	if [[ $tmdbid = *[^[:space:]]* ]] 
 	then 
 		currentURL="https://www.themoviedb.org/movie/$tmdbid"
-		content=$(wget -q -O - $currentURL | xmllint --html --xpath '//div[@class = "overview"]' - 2>/dev/null | tail -n +2 | head -n +2 | sed 's#<p>##g' | sed 's#</p>##g' | sed "s#'#''#g")
+		content=$(wget -q -O - $currentURL | xmllint --html --xpath '//div[@class = "overview"]' - 2>/dev/null | tail -n +2 | head -n +2 | cut  -c19- | sed 's#<p>##g' | sed 's#</p>##g' | sed "s#'#''#g" | tr -d '\n')
 	else 
 		currentURL="https://www.imdb.com/title/tt$imdbid/"
 	content=$(wget -q -O - $currentURL | xmllint --html --xpath '//div[@class = "inline canwrap"]' - 2>/dev/null | xmllint --html --xpath '//span' - 2>/dev/null | cut  -c11- | sed 's#</span>##g' | sed "s#'#''#g")
