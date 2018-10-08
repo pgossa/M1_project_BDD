@@ -1,4 +1,5 @@
 #!/bin/bash
+#if you are using mac OS X uncomment line 21 (psql ...) and comment line 19 and 20.
 listid=$(tail -n +2 idmovie.csv)
 for i in $listid
 do
@@ -15,5 +16,7 @@ do
 	fi
 	echo $content
 	echo $bddid
-	psql -h 127.0.0.1 -p 5454 -U cinephile -d cinema -c "BEGIN;UPDATE film SET synopsis = '$content' WHERE id_film=$bddid;COMMIT;"
+	export LD_LIBRARY_PATH=./lib/
+	./bin/psql -h 127.0.0.1 -p 5454 -U cinephile -d cinema -c "BEGIN;UPDATE film SET synopsis = '$content' WHERE id_film=$bddid;COMMIT;"
+	#psql -h 127.0.0.1 -p 5454 -U cinephile -d cinema -c "BEGIN;UPDATE film SET synopsis = '$content' WHERE id_film=$bddid;COMMIT;"
 done
