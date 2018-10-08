@@ -13,5 +13,5 @@ do
 	content=$(wget -q -O - $currentURL | xmllint --html --xpath '//div[@class = "inline canwrap"]' - 2>/dev/null | xmllint --html --xpath '//span' - 2>/dev/null | cut  -c11- | sed 's#</span>##g')
 	fi
 	echo $content
-	./bin/psql -h 127.0.0.1 -p 5454 -U francois -d projet_test -c "INSERT INTO cinema (synopsis) VALUES ($content);"
+	./bin/psql -h 127.0.0.1 -p 5454 -U francois -d cinema -c "INSERT INTO film (synopsis) VALUES ($content);"
 done
