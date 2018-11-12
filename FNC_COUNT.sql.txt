@@ -1,0 +1,12 @@
+
+CREATE OR REPLACE FUNCTION fnc_count (varchar) RETURNS int AS $$
+	
+	UPDATE film SET vector2 = vector; 
+	UPDATE film SET coun1 = LENGTH(vector);
+	UPDATE film SET vector2 = REPLACE(vector2,$1,'') WHERE id_film = 766; 
+	UPDATE film SET coun2 = LENGTH(vector2);
+	UPDATE film SET nbmot = (coun1-coun2);
+	
+	SELECT ((SELECT nbmot FROM film WHERE id_film=766)/LENGTH($1));
+$$ LANGUAGE SQL;
+
