@@ -29,6 +29,5 @@ echo $1
 	echo $content
 	#echo $bddid
 	export LD_LIBRARY_PATH=./lib/
-	#./bin/psql -h 127.0.0.1 -p 5454 -U cinephile -d cinema -c "BEGIN;UPDATE film SET synopsis = '$content' WHERE id_film=$bddid;UPDATE film SET vector = '$content2' WHERE id_film=$bddid;COMMIT;"
-	#psql -h 127.0.0.1 -p 5454 -U cinephile -d cinema -c "BEGIN;UPDATE film SET synopsis = '$content' WHERE id_film=$bddid;UPDATE film SET vector = '$content2' WHERE id_film=$bddid;COMMIT;"
+	#./bin/psql -h 127.0.0.1 -p 5454 -U cinephile -d cinema -c "BEGIN;UPDATE film SET synopsis = '$content' WHERE id_film=$bddid;COMMIT;"
 	psql -h 127.0.0.1 -p 5454 -U cinephile -d cinema -c "BEGIN;UPDATE film SET synopsis = '$content' WHERE id_film=$bddid;COMMIT;"
